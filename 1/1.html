@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta content="dark light" name="color-scheme">
+    <meta content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+    <title>1.1 — Thinknetica</title>
+    <link href="/styles.css" rel="stylesheet">
+    <script src="/utils.mjs"></script>
+</head>
+<body>
+<h2>Определить порядок выполнения операторов с помощью таблицы приоритетов операций</h2>
+<fieldset>
+    <legend>1.</legend>
+    <h3>Условие:</h3>
+    <script class="visible">
+        var x = 6, y = 15, z = 4;
+        y /= x + 5 % z;
+    </script>
+    <h4>Результат:</h4>
+    <script>printVars({x, y, z})</script>
+</fieldset>
+<fieldset>
+    <legend>2.</legend>
+    <h3>Условие:</h3>
+    <script class="visible">
+        var x = 6, y = 15, z = 4;
+        z = x++ + y * 5;
+    </script>
+    <h4>Результат:</h4>
+    <script>printVars({x, y, z})</script>
+</fieldset>
+<fieldset>
+    <legend>3.</legend>
+    <h3>Условие:</h3>
+    <script class="visible">
+        var x = 6, y = 15, z = 4;
+        x += y - x++ * z;
+    </script>
+    <h4>Результат:</h4>
+    <script>printVars({x, y, z})</script>
+</fieldset>
+<fieldset>
+    <legend>4.</legend>
+    <h3>Условие:</h3>
+    <script class="visible">
+        var x = 6, y = 15, z = 4;
+        z = --x - y * 5;
+    </script>
+    <h4>Результат:</h4>
+    <script>printVars({x, y, z})</script>
+</fieldset>
+<fieldset>
+    <legend>5.</legend>
+    <h3>Условие:</h3>
+    <script class="visible">
+        var a = 3;
+        var b = ++a + 1 + a++;
+    </script>
+    <h4>Результат:</h4>
+    <script>printVars({a, b})</script>
+</fieldset>
+</body>
+</html>

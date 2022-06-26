@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta content="dark light" name="color-scheme">
+    <meta content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+    <title>2.1 — Thinknetica</title>
+    <link href="/styles.css" rel="stylesheet">
+    <script src="/utils.mjs"></script>
+</head>
+<body>
+<h2>Реализовать функцию, которая принимает текст, и возвращает массив объектов со структурой</h2>
+<form>
+    <div class="flex">
+        <label for="url">Ссылка на JS файл:</label>
+        <script>
+            const placeholder = `https://raw.githubusercontent.com/User/Repo/Branch/Dir/script.js`
+            document.write(`<input type="url" name="url" id="url" value="${getSearchParam('url') || ''}" placeholder="${placeholder}">`)
+        </script>
+    </div>
+    <br>
+    <label for="func">Название функции:</label>
+    <script>
+        document.write(`<input name="func" id="func" placeholder="function_name" value="${getSearchParam('func') || ''}">`)
+    </script>
+    <button type="submit">Подключить</button>
+</form>
+<p style="word-break: break-word;">
+    <script>
+        const url = getSearchParam('url')
+        const func = getSearchParam('func')
+        document.write(connectScript() ?
+            `Подключен файл: <a href="${url}" target="_blank">${url}</a> (Функция: ${func || `<span style="color: coral">Не указана</span>`})` :
+            `<span style="color: coral">Файл не подключен</span>`)
+    </script>
+</p>
+<fieldset>
+    <legend>Тест возвращения массива обьектов со структурой переданного текста</legend>
+    <h3>Условие:</h3>
+    <script class="visible">
+        var text = 'Это тестовый текст',
+            validResult = [
+                {"word": "Это", "length": 3, "isCapitalized": true},
+                {"word": "тестовый", "length": 8, "isCapitalized": false},
+                {"word": "текст", "length": 5, "isCapitalized": false}
+            ],
+            f = getSearchParam('func'),
+            result = eval(f)(text),
+            isValid = equal(result, validResult);
+    </script>
+    <h4>Результат:</h4>
+    <script>
+        document.write(isValid ? `<p style="color: greenyellow">Тест пройден</p>` : `<p style="color: coral">Тест не пройден</p>`)
+        printVars({isValid, result})
+    </script>
+</fieldset>
+</body>
+</html>

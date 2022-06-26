@@ -1,0 +1,89 @@
+@supports (padding-top: env(safe-area-inset-top)) {
+    :root {
+        --safe-padding-top: env(safe-area-inset-top);
+        --safe-padding-left: env(safe-area-inset-left);
+        --safe-padding-right: env(safe-area-inset-right);
+        --safe-padding-bottom: env(safe-area-inset-bottom);
+    }
+}
+
+:root {
+    --root-padding: 20px;
+    --root-padding-top: max(var(--safe-padding-top), var(--root-padding));
+    --root-padding-left: max(var(--safe-padding-left), var(--root-padding));
+    --root-padding-right: max(var(--safe-padding-right), var(--root-padding));
+    --root-padding-bottom: max(var(--safe-padding-bottom), var(--root-padding));
+    font-family: Helvetica, sans-serif;
+}
+
+@media (max-width: 350px) {
+    :root {
+        font-size: 14px;
+        --root-padding: 16px;
+    }
+}
+
+body {
+    padding: var(--root-padding-top) var(--root-padding-right) var(--root-padding-bottom) var(--root-padding-left);
+}
+
+fieldset {
+    min-width: initial;
+    margin-bottom: 3em;
+    padding: var(--root-padding);
+    border: 1px solid;
+    overflow-x: auto;
+}
+
+@media (orientation: landscape) {
+    fieldset {
+        width: min-content;
+        overflow-x: initial;
+    }
+}
+
+legend {
+    margin-left: 0;
+    padding: 0 1ch;
+}
+
+h2 {
+    margin-bottom: 2em;
+}
+
+h3 {
+    margin-top: 0;
+}
+
+h4 {
+    margin-bottom: .5em;
+}
+
+a {
+    color: inherit;
+}
+
+script.visible {
+    margin: -1.65em 0;
+    margin-left: calc(1ch * var(--tabs) * -4);
+}
+
+script.visible, output {
+    --tabs: 2;
+    font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+    -webkit-hyphens: none;
+    line-height: 1.65;
+    white-space: pre;
+    display: block;
+    tab-size: 2;
+}
+
+.flex {
+    display: flex;
+    align-items: baseline;
+}
+
+.flex > input {
+    flex-grow: 1;
+    margin-left: 1ch;
+}
