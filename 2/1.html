@@ -26,16 +26,47 @@
     <button type="submit">Подключить</button>
 </form>
 <p style="word-break: break-word;">
-    <script>
-        const url = getSearchParam('url')
-        const func = getSearchParam('func')
-        document.write(connectScript() ?
-            `Подключен файл: <a href="${url}" target="_blank">${url}</a> (Функция: ${func || `<span style="color: coral">Не указана</span>`})` :
-            `<span style="color: coral">Файл не подключен</span>`)
-    </script>
+    <script>printTargetParams()</script>
 </p>
-<fieldset>
-    <legend>Тест возвращения массива обьектов со структурой переданного текста</legend>
+<fieldset id="structure">
+    <legend><a href="#structure">Тест возвращения массива обьектов</a></legend>
+    <h3>Условие:</h3>
+    <script class="visible">
+        var text = 'Test text',
+            f = getTargetFunction(),
+            result = f(text),
+            isValid = Array.isArray(result)
+                && result.length === 2
+                && typeof result[0] === 'object'
+                && result[0].word === 'Test';
+    </script>
+    <h4>Результат:</h4>
+    <details>
+        <summary>
+            <script>printStatus(isValid)</script>
+        </summary>
+        <script>printVars({isValid, result})</script>
+    </details>
+</fieldset>
+<fieldset id="capitalization">
+    <legend><a href="#capitalization">Тест определения заглавных букв</a></legend>
+    <h3>Условие:</h3>
+    <script class="visible">
+        var text = 'This is Test text',
+            f = getTargetFunction(),
+            result = f(text),
+            isValid = result[0].isCapitalized && result[2].isCapitalized;
+    </script>
+    <h4>Результат:</h4>
+    <details>
+        <summary>
+            <script>printStatus(isValid)</script>
+        </summary>
+        <script>printVars({isValid, result})</script>
+    </details>
+</fieldset>
+<fieldset id="cyrillic">
+    <legend><a href="#cyrillic">Тест на поддержку кириллицы</a></legend>
     <h3>Условие:</h3>
     <script class="visible">
         var text = 'Это тестовый текст',
@@ -44,15 +75,60 @@
                 {"word": "тестовый", "length": 8, "isCapitalized": false},
                 {"word": "текст", "length": 5, "isCapitalized": false}
             ],
-            f = getSearchParam('func'),
-            result = eval(f)(text),
+            f = getTargetFunction(),
+            result = f(text),
             isValid = equal(result, validResult);
     </script>
     <h4>Результат:</h4>
-    <script>
-        document.write(isValid ? `<p style="color: greenyellow">Тест пройден</p>` : `<p style="color: coral">Тест не пройден</p>`)
-        printVars({isValid, result})
+    <details>
+        <summary>
+            <script>printStatus(isValid)</script>
+        </summary>
+        <script>printVars({isValid, result})</script>
+    </details>
+</fieldset>
+<fieldset id="punctuation">
+    <legend><a href="#punctuation">Тест на поддержку пунктуации</a></legend>
+    <h3>Условие:</h3>
+    <script class="visible">
+        var text = 'это, "тестовый" текст !',
+            validResult = [
+                {"word": "Это", "length": 3, "isCapitalized": false},
+                {"word": "тестовый", "length": 8, "isCapitalized": false},
+                {"word": "текст", "length": 5, "isCapitalized": false}
+            ],
+            f = getTargetFunction(),
+            result = f(text),
+            isValid = equal(result, validResult);
     </script>
+    <h4>Результат:</h4>
+    <details>
+        <summary>
+            <script>printStatus(isValid)</script>
+        </summary>
+        <script>printVars({isValid, result})</script>
+    </details>
+</fieldset>
+<fieldset id="linebreak">
+    <legend><a href="#linebreak">Тест на поддержку разрыва строк</a></legend>
+    <h3>Условие:</h3>
+    <script class="visible">
+        var text = 'не\r\nвероятно !',
+            validResult = [
+                {"word": "не", "length": 2, "isCapitalized": false},
+                {"word": "вероятно", "length": 8, "isCapitalized": false}
+            ],
+            f = getTargetFunction(),
+            result = f(text),
+            isValid = equal(result, validResult);
+    </script>
+    <h4>Результат:</h4>
+    <details>
+        <summary>
+            <script>printStatus(isValid)</script>
+        </summary>
+        <script>printVars({isValid, result})</script>
+    </details>
 </fieldset>
 </body>
 </html>

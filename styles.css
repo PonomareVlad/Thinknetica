@@ -87,3 +87,8 @@ script.visible, output {
     flex-grow: 1;
     margin-left: 1ch;
 }
+
+details summary {
+    margin: 1em 0;
+    cursor: pointer;
+}

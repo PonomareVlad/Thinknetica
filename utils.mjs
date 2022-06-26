@@ -1,3 +1,11 @@
+function printTargetParams(urlParam = 'url', funcParam = 'func') {
+    const url = getSearchParam(urlParam)
+    const func = getSearchParam(funcParam)
+    document.write(connectScript() ?
+        `Подключен файл: <a href="${url}" target="_blank">${url}</a> (Функция: ${func || `<span style="color: coral">Не указана</span>`})` :
+        `<span style="color: coral">Файл не подключен</span>`)
+}
+
 function printVars(vars, tabs = 2) {
     document.write(`<output>${Object.entries(vars).map(([k, v]) =>
         `${k} = ${typeof v == "object" ? JSON.stringify(v, null, 4) : v};`).join(`\r\n`)}</output>`)
@@ -7,12 +15,22 @@ function getSearchParam(name) {
     return new URL(location).searchParams.get(name)
 }
 
-function connectScript() {
+function connectScript(urlParam = 'url') {
     const params = new URL(location).searchParams
-    if (!params.has('url') || !params.get('url')) return false
-    const url = params.get('url').replace(`https://raw.githubusercontent.com/`, 'https://cdn.statically.io/gh/')
+    if (!params.has(urlParam) || !params.get(urlParam)) return false
+    const url = params.get(urlParam).replace(`https://raw.githubusercontent.com/`, 'https://cdn.statically.io/gh/')
     document.write(`<script src="${url}"></script>`)
     return true
+}
+
+function getTargetFunction(funcParam = 'func') {
+    return eval(getSearchParam(funcParam))
+}
+
+function printStatus(status) {
+    const color = status ? 'greenyellow' : 'coral',
+        message = status ? 'Тест пройден' : 'Тест не пройден'
+    document.write(`<span style="color: ${color}">${message}</span>`)
 }
 
 function equal(a, b) {
