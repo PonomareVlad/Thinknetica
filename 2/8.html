@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta content="dark light" name="color-scheme">
+    <meta content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+    <title>2.8 — Thinknetica</title>
+    <link href="/styles.css" rel="stylesheet">
+    <script src="/utils.mjs"></script>
+</head>
+<body>
+<h2>Создать объект human со следующими возможностями ...</h2>
+<form>
+    <div class="flex">
+        <label for="url">Ссылка на JS файл:</label>
+        <script>
+            const placeholder = `https://raw.githubusercontent.com/User/Repo/Branch/Dir/script.js`
+            document.write(`<input type="url" name="url" id="url" value="${getSearchParam('url') || ''}" placeholder="${placeholder}">`)
+        </script>
+    </div>
+    <button type="submit">Подключить</button>
+</form>
+<p style="word-break: break-word;">
+    <script>printTargetParams(false)</script>
+</p>
+<fieldset id="name">
+    <legend><a href="#name">Тест установки имени без фамилии</a></legend>
+    <h3>Условие:</h3>
+    <script class="visible">
+        human.fullName = 'Добби';
+        var name = human.fullName,
+            isValid = name === 'Добби';
+    </script>
+    <h4>Результат:</h4>
+    <details>
+        <summary>
+            <script>printStatus(isValid)</script>
+        </summary>
+        <script>printVars({isValid, name})</script>
+    </details>
+</fieldset>
+<fieldset id="date-ru">
+    <legend><a href="#date-ru">Тест установки даты (ru-RU)</a></legend>
+    <h3>Условие:</h3>
+    <script class="visible">
+        human.dateOfBirth = '01.01.2000';
+        var age = human.age,
+            date = human.dateOfBirth,
+            isValid = age === 22
+                && date === '01.01.2000';
+    </script>
+    <h4>Результат:</h4>
+    <details>
+        <summary>
+            <script>printStatus(isValid)</script>
+        </summary>
+        <script>printVars({isValid, age, date})</script>
+    </details>
+</fieldset>
+<fieldset id="date-en">
+    <legend><a href="#date-en">Тест установки даты (en-US)</a></legend>
+    <h3>Условие:</h3>
+    <script class="visible">
+        human.dateOfBirth = '1/1/2000';
+        var age = human.age,
+            date = human.dateOfBirth,
+            isValid = age === 22
+                && date === '01.01.2000';
+    </script>
+    <h4>Результат:</h4>
+    <details>
+        <summary>
+            <script>printStatus(isValid)</script>
+        </summary>
+        <script>printVars({isValid, age, date})</script>
+    </details>
+</fieldset>
+</body>
+</html>

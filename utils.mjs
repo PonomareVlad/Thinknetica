@@ -1,9 +1,9 @@
-function printTargetParams(urlParam = 'url', funcParam = 'func') {
+function printTargetParams(funcParam = 'func', urlParam = 'url') {
     const url = getSearchParam(urlParam)
-    const func = getSearchParam(funcParam)
+    const func = funcParam ? getSearchParam(funcParam) : ''
+    const printFunc = funcParam ? `(Функция: ${func || `<span style="color: coral">Не указана</span>`})` : ''
     document.write(connectScript() ?
-        `Подключен файл: <a href="${url}" target="_blank">${url}</a> (Функция: ${func || `<span style="color: coral">Не указана</span>`})` :
-        `<span style="color: coral">Файл не подключен</span>`)
+        `Подключен файл: <a href="${url}" target="_blank">${url}</a> ${printFunc}` : `<span style="color: coral">Файл не подключен</span>`)
 }
 
 function printVars(vars, tabs = 2) {
