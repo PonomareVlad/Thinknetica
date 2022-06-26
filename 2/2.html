@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta content="dark light" name="color-scheme">
+    <meta content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+    <title>2.2 — Thinknetica</title>
+    <link href="/styles.css" rel="stylesheet">
+    <script src="/utils.mjs"></script>
+</head>
+<body>
+<h2>Реализовать функцию для сравнения двух массивов, сравнение должно попарно сравнивать каждый элемент</h2>
+<form>
+    <div class="flex">
+        <label for="url">Ссылка на JS файл:</label>
+        <script>
+            const placeholder = `https://raw.githubusercontent.com/User/Repo/Branch/Dir/script.js`
+            document.write(`<input type="url" name="url" id="url" value="${getSearchParam('url') || ''}" placeholder="${placeholder}">`)
+        </script>
+    </div>
+    <br>
+    <label for="func">Название функции:</label>
+    <script>
+        document.write(`<input name="func" id="func" placeholder="function_name" value="${getSearchParam('func') || ''}">`)
+    </script>
+    <button type="submit">Подключить</button>
+</form>
+<p style="word-break: break-word;">
+    <script>printTargetParams()</script>
+</p>
+<fieldset id="length">
+    <legend><a href="#length">Тест массивов разной длинны</a></legend>
+    <h3>Условие:</h3>
+    <script class="visible">
+        var array1 = [1, 2, 3],
+            array2 = [1, 2, 3, 4],
+            f = getTargetFunction(),
+            result = f(array1, array2),
+            isValid = !result;
+    </script>
+    <h4>Результат:</h4>
+    <details>
+        <summary>
+            <script>printStatus(isValid)</script>
+        </summary>
+        <script>printVars({isValid, result})</script>
+    </details>
+</fieldset>
+<fieldset id="order">
+    <legend><a href="#order">Тест измененного порядка элементов</a></legend>
+    <h3>Условие:</h3>
+    <script class="visible">
+        var array1 = ["я", "это", "не", "буду"],
+            array2 = ["я", "буду", "не", "это"],
+            f = getTargetFunction(),
+            result = f(array1, array2),
+            isValid = !result;
+    </script>
+    <h4>Результат:</h4>
+    <details>
+        <summary>
+            <script>printStatus(isValid)</script>
+        </summary>
+        <script>printVars({isValid, result})</script>
+    </details>
+</fieldset>
+<fieldset id="empty">
+    <legend><a href="#empty">Тест пустых элементов в массиве</a></legend>
+    <h3>Условие:</h3>
+    <script class="visible">
+        var array1 = [1, , , 4],
+            array2 = [1, 2, 3, 4],
+            f = getTargetFunction(),
+            result = f(array1, array2),
+            isValid = !result;
+    </script>
+    <h4>Результат:</h4>
+    <details>
+        <summary>
+            <script>printStatus(isValid)</script>
+        </summary>
+        <script>printVars({isValid, result})</script>
+    </details>
+</fieldset>
+</body>
+</html>
