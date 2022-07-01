@@ -57,7 +57,7 @@
             f = getTargetFunction(),
             results = f(array1, array2),
             isValid = (results[1] === false || results[1] === -1)
-                && !results[3];
+                && (results[3] === false || results[3] === -1);
     </script>
     <h4>Результат:</h4>
     <details>
