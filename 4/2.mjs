@@ -36,3 +36,23 @@ function MotorShip(power, bodyMaterial) {
 function SailShip(sailCount, sailArea) {
     Object.assign(this, {type: 'sail', sailCount, sailArea})
 }
+
+function MotorShipyard() {
+    Object.assign(this, new Shipyard(MotorShip))
+}
+
+function SailShipyard() {
+    Object.assign(this, new Shipyard(SailShip))
+}
+
+// const badShipyard = new Shipyard({})
+const sailShipyard = new SailShipyard()
+const motorShipyard = new MotorShipyard()
+
+const newMotorShip = motorShipyard.createShip(123, 'carbon')
+
+console.debug(1, sailShipyard.changeShipColor(newMotorShip, 'transparent'))
+console.debug(2, motorShipyard.swapShip(newMotorShip, 321, 'wood'))
+console.debug(3, sailShipyard.repairShip(newMotorShip))
+
+console.debug('Result:', newMotorShip)
