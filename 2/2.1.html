@@ -37,8 +37,8 @@
             f = getTargetFunction(),
             results = f(array1, array2),
             isValid = results.length === 4
-                && results[0]
-                && !results[3];
+                && (results[0] === true || results[0] === 0)
+                && (results[3] === false || results[3] === -1);
     </script>
     <h4>Результат:</h4>
     <details>
@@ -56,8 +56,8 @@
             array2 = ["я", "буду", "не", "это"],
             f = getTargetFunction(),
             results = f(array1, array2),
-            isValid = !results[1]
-                && !results[3];
+            isValid = (results[1] === false || results[1] === -1)
+                && (results[3] === false || results[3] === -1);
     </script>
     <h4>Результат:</h4>
     <details>
@@ -76,9 +76,9 @@
             f = getTargetFunction(),
             results = f(array1, array2),
             isValid = results.length === 4
-                && results[0]
-                && !results[1]
-                && !results[2];
+                && (results[0] === true || results[0] === 0)
+                && (results[1] === false || results[1] === -1)
+                && (results[2] === false || results[2] === -1);
     </script>
     <h4>Результат:</h4>
     <details>
