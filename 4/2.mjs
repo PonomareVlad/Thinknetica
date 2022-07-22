@@ -13,12 +13,14 @@ function Shipyard(shipConstructor) {
         },
         changeShipColor: function (ship, color) {
             console.info('Changing color...')
-            return Object.assign(ship.data, {color})
+            Object.assign(ship.data, {color})
+            return ship;
         },
         repairShip: function (ship) {
             if (!this.checkAccess(ship)) return ship;
             console.info('Repairing...')
-            return Object.assign(ship.data, {repaired: Date.now()})
+            Object.assign(ship.data, {repaired: Date.now()})
+            return ship;
         },
         swapShip: function (ship, ...args) {
             if (!this.checkAccess(ship)) return ship;
@@ -54,11 +56,11 @@ function SailShip(sailCount, sailArea) {
 }
 
 function MotorShipyard() {
-    Object.assign(this, new Shipyard(MotorShip))
+    return new Shipyard(MotorShip)
 }
 
 function SailShipyard() {
-    Object.assign(this, new Shipyard(SailShip))
+    return new Shipyard(SailShip)
 }
 
 // const badShipyard = new Shipyard({})
