@@ -13,28 +13,44 @@ function Shipyard(shipConstructor) {
         },
         changeShipColor: function (ship, color) {
             console.info('Changing color...')
-            return Object.assign(ship, {color})
+            return Object.assign(ship.data, {color})
         },
         repairShip: function (ship) {
             if (!this.checkAccess(ship)) return ship;
             console.info('Repairing...')
-            return Object.assign(ship, {repaired: Date.now()})
+            return Object.assign(ship.data, {repaired: Date.now()})
         },
         swapShip: function (ship, ...args) {
             if (!this.checkAccess(ship)) return ship;
             console.info('Swapping...')
+            const newShip = this.createShip(...args)
             Object.keys(ship).forEach(key => delete ship[key])
-            return Object.assign(ship, this.createShip(...args))
+            Object.setPrototypeOf(ship, Object.getPrototypeOf(newShip))
+            return Object.assign(ship, newShip)
         }
     })
 }
 
+function Ship() {
+    let color = null;
+    this.data = {
+        set color(value) {
+            color = value
+        },
+        get color() {
+            return color
+        }
+    }
+}
+
 function MotorShip(power, bodyMaterial) {
-    Object.assign(this, {type: 'motor', power, bodyMaterial})
+    Object.setPrototypeOf(Object.getPrototypeOf(this), new Ship)
+    Object.assign(this.data, {power, bodyMaterial})
 }
 
 function SailShip(sailCount, sailArea) {
-    Object.assign(this, {type: 'sail', sailCount, sailArea})
+    Object.setPrototypeOf(Object.getPrototypeOf(this), new Ship)
+    Object.assign(this.data, {sailCount, sailArea})
 }
 
 function MotorShipyard() {
